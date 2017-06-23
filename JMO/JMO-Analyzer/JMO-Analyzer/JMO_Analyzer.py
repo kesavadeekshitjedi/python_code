@@ -12,6 +12,11 @@ splitTriggersFile="D:\\JPMC-JMO\\extracts\\combined\\TriggersFile.txt"
 splitResourceFile="D:\\JPMC-JMO\\extracts\\combined\\ResourcesFile.txt"
 splitCalendarsFile="D:\\JPMC-JMO\\extracts\\combined\\CalendarsFile.txt"
 splitJobParmsFile="D:\\JPMC-JMO\\extracts\\combined\\JobParmsFile.txt"
+
+def readSplitFiles(searchLine,searchFile):
+    logger=logging.getLogger("JMOAnalyzer.readSplitFiles")
+    logger.info("Searching for {0} in {1}".format(searchLine,searchFile))
+
 def main():
     logging.config.fileConfig("logging.config")
     logger=logging.getLogger("JMOAnalyzer.main")
