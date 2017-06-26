@@ -40,11 +40,14 @@ unqresourceList = []
 unqtriggerList = []
 jobStationMap = []  # Contains a mapping between jobs and stations. What jobs run on what stations.
 jobsetStationMap = []  # Contains a mapping between jobsets and stations.
-jobJobsetMap = defaultdict(
-    list)  # Dictionary of keys=jobsets and jobs=jobset,job,jobnumber. This is similiar to Dictionary(String, List<String>) in c# or Java
+jobJobsetMap = defaultdict(list)  # Dictionary of keys=jobsets and jobs=jobset,job,jobnumber. This is similiar to Dictionary(String, List<String>) in c# or Java
+jobDependencyMap = defaultdict(list) # Dictionary that stores the job with its dependencies (jobset,job,jobnumber):(List of dependencies)
 jmoJobList = []  # List of all jobs. Will contain non-unique jobs
 jobmultiple = 0
 triggerMultiple = 0
+predExistsT4=[]
+predExistsT2=[]
+predNotExist=[]
 
 jmoExtractFile = "";
 
@@ -191,23 +194,39 @@ def readJMOExtract(jmoExtract):
                     currentJobString = currentLine.partition(jobpredDefString)[2].partition("PJOB")[0].strip()
                     predecessorJobString = currentLine.partition("PJOB=")[2].partition("PSET")[0].strip()
                     predecessorJobsetString = currentLine.partition("PSET=")[2].partition("PJNO")[0].strip()
-                    predecessorJobNumberString=currentJobString.partition("PJNO=")[2].partition("WORKDAY")
+                    predecessorJobNumberString=currentLine.partition("PJNO=")[2].partition("WORKDAY")[0].strip()
                     logger.debug("Current Job Info: {0}".format((currentJobString)))
                     logger.debug("Dependent Job Info: {0}".format(predecessorJobString))
                     logger.debug("Dependent Jobset Info: {0}".format(predecessorJobsetString))
-                    if("WORKDAY" in currentLine):
-                        predecessorJobNumberString = currentLine.partition("PJNO=")[2].partition("WORKDAY")[0].strip()
-                    if("WORKDAY" in currentLine and "TRID" in currentLine):
-                        logger.debug("Job depends on trigger")
-                        currentJobString = currentLine.partition(jobpredDefString)[2].partition("WORKDAY")[0].strip()
-                        triggerName=currentLine.partition("TRID=")[2].strip()
-                        triggerType=currentLine.partition("TREV")[2].partition("TRID")[0].strip()
+                    logger.debug("Dependent Jobnumber Info: {0}".format(predecessorJobNumberString))
+                    jobDependencyMap[currentJobString].append(predecessorJobsetString+"-"+predecessorJobString+"-"+predecessorJobNumberString)
+
+                if("WORKDAY" in currentLine and "TRID" in currentLine):
+                    logger.debug("Job depends on trigger")
+                    currentJobString = currentLine.partition(jobpredDefString)[2].partition("WORKDAY")[0].strip()
+                    triggerName=currentLine.partition("TRID=")[2].strip()
+                    triggerType=currentLine.partition("TREV=")[2].partition("TRID")[0].strip()
+                    logger.debug("Current Job Info: {0}".format((currentJobString)))
+                    logger.debug("Dependent Trigger Info: {0}".format(triggerName))
+                    logger.debug("Dependent Trigger Type: {0}".format(triggerType))
+                    jobDependencyMap[currentJobString].append(triggerName + "-" + triggerType)
                 else:
-                    if (not "PJNO" in currentLine):
+                    if (not "PJNO" in currentLine and "PSET" in currentLine):
+                        logger.debug(currentLine)
                         logger.debug("Job depends only on other jobset.")
+                        currentJobString=currentLine.partition(jobpredDefString)[2].partition("PSET=")[0].strip()
+                        #predecessorJobString = currentLine.partition("PJOB=")[2].partition("PSET")[0].strip()
+                        predecessorJobSetString=currentLine.partition("PSET=")[2].partition("WORKDAY")[0].strip()
+                        logger.debug("Current Job Info: {0}".format((currentJobString)))
+                        #logger.debug("Dependent Job Info: {0}".format(predecessorJobString))
+                        logger.debug("Dependent Jobset Info: {0}".format(predecessorJobsetString))
+                        jobDependencyMap[currentJobString].append(predecessorJobsetString)
+
 
     print(jobJobsetMap)
+    checkIfPredExists()
     createFinalJMOReport()
+
 
 
 def getDuplicateTriggers():
@@ -217,12 +236,33 @@ def getDuplicateTriggers():
 def checkIfPredExists():
     logger=logging.getLogger("JPMC-JMO-Analyzer.predecessorCheck")
     tranche4File="D:\OneDrive-Business\OneDrive - Robert Mark Technologies\JPMC-JMO-Conversion\JMO_Extracts\combinedextracts\P4-Extract.txt"
+    t4_File=open(tranche4File,"r")
+    t4_array=t4_File.readlines()
+    for predJobInfo in jobDependencyMap.keys():
+        predecessorInfoTuple = jobDependencyMap[predJobInfo].split("-")
+        if (len(predecessorInfoTuple) == 3):
+            predecessorJobset = predecessorInfoTuple[0].strip()
+            predecessorJob = predecessorInfoTuple[1].strip()
+            predecessorJobNo = predecessorInfoTuple[2].strip()
+            checkString = "DEFINE JOB ID=(" + predecessorJobset + "," + predecessorJob + "," + predecessorJobNo + ")".strip()
+            if(checkString in t4_array):
+                predExistsT4.append(predJobInfo+":"+"True")
+            else:
+                checkIfPredExistsInT2(predJobInfo,checkString)
 
 
-def checkIfPredExistsInT2():
+
+
+
+def checkIfPredExistsInT2(predJobInfo,checkString):
     logger = logging.getLogger("JPMC-JMO-Analyzer.predecessorCheck")
     tranche2File="D:\OneDrive-Business\OneDrive - Robert Mark Technologies\JPMC-JMO-Conversion\JMO_Extracts\combinedextracts\P2-Extract.txt"
-
+    t2_File = open(tranche2File, "r")
+    t2_array = t2_File.readlines()
+    if(checkString in t2_array):
+        predExistsT2.append(predJobInfo+":"+"True")
+    else:
+        predNotExist.append(predJobInfo+":"+"False")
 
 def writeToFile(outFile, myLine, mode):
     fileWriter = open(outFile, mode)
