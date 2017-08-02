@@ -87,10 +87,11 @@ def readJil(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,topBoxTime)
             if("insert_job" in currentJilLine):
                 logger.debug("Job Line found")
                 jobName=currentJilLine.partition("insert_job:")[2].partition("job_type:")[0].strip()
+                jobType=currentJilLine.partition("job_type:")[2].strip()
             groupAttribute="group: "+groupSearchString
             applAttribute="application: "+groupSearchString
-            if((groupSearchString in currentJilLine)  and (not "#" in currentJilLine)):
-                logger.info("Match found: {0} with Group: {1} ".format(jobName,groupSearchString))
+            if(((groupSearchString in currentJilLine)  and (not "#" in currentJilLine)) and jobType=="BOX"):
+                logger.info("Match found: {0} with search string: {1} ".format(jobName,groupSearchString))
                 logger.debug("Current Line: {0}".format(currentJilLine))
                 print("update_job: "+jobName)
                 print("box_name: "+topBoxName)
@@ -98,14 +99,15 @@ def readJil(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,topBoxTime)
                 #print("start_times: "+topBoxTime)
                 writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","update_job: "+jobName)
                 writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","box_name: "+topBoxName) 
-                #writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","date_conditions: 1")
-                #writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","start_times: "+topBoxTime)
+                writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","date_conditions: 1")
+                writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","start_times: "+topBoxTime)
+                writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","run_calendar: "+topBoxCalendar)
                 writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","\n")
 
 def main():
     logging.config.fileConfig("logging.conf")
     logger=logging.getLogger("JPMC-JilAnalyzer.main")
-    readExcelForTopLevel("D:\\OneDrive-Business\\OneDrive - Robert Mark Technologies\\JPMC-JMO-Conversion\\JMO_Extracts\\Phase4\\Tranche4JobstoBeConverted-PrebatchandOMNILoad.xlsx","Sheet1")
+    readExcelForTopLevel("C:\\JMOFiles\\Tranche4JobstoBeConverted-PrebatchandOMNILoadshorty.xlsx","Sheet1")
     print(type(jobsetsInTopBox))
     keyList=jobsetsInTopBox.keys()
     print(type(keyList))
