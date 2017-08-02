@@ -115,8 +115,8 @@ def main():
     user_choice=input("Select an option (1) or (2).")
     if(user_choice=="1"):
    
-        readJil("D:\\OneDrive-Business\\OneDrive - Robert Mark Technologies\\JPMC-JMO-Conversion\\JMO_Extracts\\Phase4\\From_Hank\\2017.07.30\\TopBoxDisabled__NonODSEnabled\\JOBS_____.Tranche4.jil","D:\JPMC-JMO\\scripted_outputFiles\\Resources.jil","D:\JPMC-JMO\\scripted_outputFiles\\Machines.jil")
-        readJil("D:\\OneDrive-Business\\OneDrive - Robert Mark Technologies\\JPMC-JMO-Conversion\\JMO_Extracts\\Phase4\\From_Hank\\2017.07.30\\TopBoxDisabled__NonODSEnabled\\JOBS_____.ONDMD.Tranche4.jil","D:\JPMC-JMO\\scripted_outputFiles\\Resources_ONDMD.jil","D:\JPMC-JMO\\scripted_outputFiles\\Machines_ONDMD.jil")
+        readJil("C:\\JMOFiles\\JOBS_____.Tranche4.jil","D:\JPMC-JMO\\scripted_outputFiles\\Resources.jil","D:\JPMC-JMO\\scripted_outputFiles\\Machines.jil")
+        readJil("C:\\JMOFiles\\JOBS_____.ONDMD.Tranche4.jil","D:\JPMC-JMO\\scripted_outputFiles\\Resources_ONDMD.jil","D:\JPMC-JMO\\scripted_outputFiles\\Machines_ONDMD.jil")
         logger.info("Done")  
     else:
         if(user_choice=="2"):
