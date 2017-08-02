@@ -109,30 +109,39 @@ def readJilForGroup(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,top
 def main():
     logging.config.fileConfig("logging.conf")
     logger=logging.getLogger("JPMC-GroupExtract.main")
-    readJil("D:\\OneDrive-Business\\OneDrive - Robert Mark Technologies\\JPMC-JMO-Conversion\\JMO_Extracts\\Phase4\\From_Hank\\2017.07.30\\TopBoxDisabled__NonODSEnabled\\JOBS_____.Tranche4.jil","D:\JPMC-JMO\\scripted_outputFiles\\Resources.jil","D:\JPMC-JMO\\scripted_outputFiles\\Machines.jil")
-    readJil("D:\\OneDrive-Business\\OneDrive - Robert Mark Technologies\\JPMC-JMO-Conversion\\JMO_Extracts\\Phase4\\From_Hank\\2017.07.30\\TopBoxDisabled__NonODSEnabled\\JOBS_____.ONDMD.Tranche4.jil","D:\JPMC-JMO\\scripted_outputFiles\\Resources_ONDMD.jil","D:\JPMC-JMO\\scripted_outputFiles\\Machines_ONDMD.jil")
-    logger.info("Done")  
-    readExcelForTopLevel("C:\\JMOFiles\\Tranche4JobstoBeConverted-PrebatchandOMNILoadshorty.xlsx","Sheet1")
-    print(type(jobsetsInTopBox))
-    keyList=jobsetsInTopBox.keys()
-    print(type(keyList))
-    boxStartTime="";
-    boxCalendar="";
-    myKeyList=list(keyList)
-    for key in myKeyList:
-        keyValues=jobsetsInTopBox[key]
-        for kvalue in keyValues:
-            logger.debug("Value for Key: {0} is {1} ".format(key,kvalue))
-            kvTuple=kvalue.split('-')
-            logger.info(kvTuple)
-            boxStartTime=kvTuple[1].strip()
-            boxCalendar=kvTuple[2].strip()
-            readJilForGroup("c:\\jmofiles\\JOBS_____.Tranche4.jil",kvTuple[0],key,kvTuple[2],kvTuple[1])
-        writeToFile("C:\\JMOFiles\\TopBoxFile.txt","insert_job: "+key)
-        writeToFile("C:\\JMOFiles\\TopBoxFile.txt","job_type: BOX")
-        writeToFile("C:\\JMOFiles\\TopBoxFile.txt","date_conditions: 1")
-        writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: "+boxStartTime)
-        writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: "+boxCalendar)
+    print("1. Read JIL File and create missing machine and resource defs")
+    print("2. Read Excel sheet to create Top Level Boxes")
+    
+    user_choice=input("Select an option (1) or (2).")
+    if(user_choice=="1"):
+   
+        readJil("D:\\OneDrive-Business\\OneDrive - Robert Mark Technologies\\JPMC-JMO-Conversion\\JMO_Extracts\\Phase4\\From_Hank\\2017.07.30\\TopBoxDisabled__NonODSEnabled\\JOBS_____.Tranche4.jil","D:\JPMC-JMO\\scripted_outputFiles\\Resources.jil","D:\JPMC-JMO\\scripted_outputFiles\\Machines.jil")
+        readJil("D:\\OneDrive-Business\\OneDrive - Robert Mark Technologies\\JPMC-JMO-Conversion\\JMO_Extracts\\Phase4\\From_Hank\\2017.07.30\\TopBoxDisabled__NonODSEnabled\\JOBS_____.ONDMD.Tranche4.jil","D:\JPMC-JMO\\scripted_outputFiles\\Resources_ONDMD.jil","D:\JPMC-JMO\\scripted_outputFiles\\Machines_ONDMD.jil")
+        logger.info("Done")  
+    else:
+        if(user_choice=="2"):
+            readExcelForTopLevel("C:\\JMOFiles\\Tranche4JobstoBeConverted-PrebatchandOMNILoadshorty.xlsx","Sheet1")
+            print(type(jobsetsInTopBox))
+            keyList=jobsetsInTopBox.keys()
+            print(type(keyList))
+            boxStartTime="";
+            boxCalendar="";
+            myKeyList=list(keyList)
+            for key in myKeyList:
+                keyValues=jobsetsInTopBox[key]
+                for kvalue in keyValues:
+                    logger.debug("Value for Key: {0} is {1} ".format(key,kvalue))
+                    kvTuple=kvalue.split('-')
+                    logger.info(kvTuple)
+                    boxStartTime=kvTuple[1].strip()
+                    boxCalendar=kvTuple[2].strip()
+                    readJilForGroup("c:\\jmofiles\\JOBS_____.Tranche4.jil",kvTuple[0],key,kvTuple[2],kvTuple[1])
+                writeToFile("C:\\JMOFiles\\TopBoxFile.txt","insert_job: "+key)
+                writeToFile("C:\\JMOFiles\\TopBoxFile.txt","job_type: BOX")
+                writeToFile("C:\\JMOFiles\\TopBoxFile.txt","date_conditions: 1")
+                writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: "+boxStartTime)
+                writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: "+boxCalendar)
+
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_ods_heartbeat","d68.am.prebatch.maint.base.main.box","base","18:45")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_pentaho_carte_reboot","d68.am.prebatch.maint.base.main.box","base","18:45")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_gwm_uscore_bus_sys_partition","d68.am.prebatch.maint.us_cmpl.main.box","us_cmpl","18:45")
