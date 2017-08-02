@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/JMOAnalyzer.iml" filepath="$PROJECT_DIR$/.idea/JMOAnalyzer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../AutoSysUtils/extractJobsFromJil/.idea/extractJobsFromJil.iml" filepath="$PROJECT_DIR$/../../AutoSysUtils/extractJobsFromJil/.idea/extractJobsFromJil.iml" />
     </modules>
   </component>
 </project>

@@ -199,7 +199,7 @@ def readJMOExtract(jmoExtract):
                     logger.debug("Dependent Job Info: {0}".format(predecessorJobString))
                     logger.debug("Dependent Jobset Info: {0}".format(predecessorJobsetString))
                     logger.debug("Dependent Jobnumber Info: {0}".format(predecessorJobNumberString))
-                    jobDependencyMap[currentJobString].append(predecessorJobsetString+"^"+predecessorJobString+"^"+predecessorJobNumberString)
+                    jobDependencyMap[currentJobString].append(predecessorJobsetString+"-"+predecessorJobString+"-"+predecessorJobNumberString)
 
                 if("WORKDAY" in currentLine and "TRID" in currentLine):
                     logger.debug("Job depends on trigger")
@@ -209,7 +209,7 @@ def readJMOExtract(jmoExtract):
                     logger.debug("Current Job Info: {0}".format((currentJobString)))
                     logger.debug("Dependent Trigger Info: {0}".format(triggerName))
                     logger.debug("Dependent Trigger Type: {0}".format(triggerType))
-                    jobDependencyMap[currentJobString].append(triggerName + "^" + triggerType)
+                    jobDependencyMap[currentJobString].append(triggerName + "-" + triggerType)
                 else:
                     if (not "PJNO" in currentLine and "PSET" in currentLine):
                         logger.debug(currentLine)
@@ -234,113 +234,35 @@ def getDuplicateTriggers():
     print(set([x for x in unqtriggerList if unqtriggerList.count(x) > 1]))
 
 def checkIfPredExists():
-    global jobInT4
     logger=logging.getLogger("JPMC-JMO-Analyzer.predecessorCheck")
-    tranche4JobsFile="C:\JMOFiles\T4_Jobs.txt"
-    tranche4JobsetFile="C:\JMOFiles\T4_Jobset.txt"
-    tranche4TriggerFile = "C:\JMOFiles\T4_Triggers.txt"
-
+    tranche4File="D:\OneDrive-Business\OneDrive - Robert Mark Technologies\JPMC-JMO-Conversion\JMO_Extracts\combinedextracts\P4-Extract.txt"
+    t4_File=open(tranche4File,"r")
+    t4_array=t4_File.readlines()
     for predJobInfo in jobDependencyMap.keys():
-        predecessorInfoList = jobDependencyMap[predJobInfo]
-        predecessorString=''.join(predecessorInfoList)
-        logger.debug(predecessorString)
-        predecessorInfoTuple=predecessorString.split('^')
+        predecessorInfoTuple = jobDependencyMap[predJobInfo].split("-")
         if (len(predecessorInfoTuple) == 3):
             predecessorJobset = predecessorInfoTuple[0].strip()
             predecessorJob = predecessorInfoTuple[1].strip()
             predecessorJobNo = predecessorInfoTuple[2].strip()
             checkString = "DEFINE JOB ID=(" + predecessorJobset + "," + predecessorJob + "," + predecessorJobNo + ")".strip()
-            logger.info("Checking for string: {0} ".format(checkString))
-
-            with open(tranche4JobsFile) as t4Jobs:
-                for line in t4Jobs:
-                    currentJobLine=line.strip()
-                    logger.debug(currentJobLine)
-                    if(checkString in currentJobLine):
-
-                        jobInT4=True
-                        predExistsT4.append(checkString+":True")
-                        continue
-            if(jobInT4==False):
-                checkIfPredExistsInT2(checkString,"JOB")
-
-        elif(len(predecessorInfoTuple)<=2):
-            predecessorTrigger=predecessorInfoTuple[0].strip()
-            predecessorTriggerType=predecessorInfoTuple[1].strip()
-            logger.info("Looking for Trigger: {0} of type: {1}".format(predecessorTrigger,predecessorTriggerType))
-            checkString="DEFINE TRIGGER ID=("+predecessorTrigger+","+predecessorTriggerType+")"
-            logger.info("Checking for string: {0} ".format(checkString))
-
-            with open(tranche4TriggerFile) as t4Trigs:
-                for line in t4Trigs:
-                    currentJobLine=line.strip()
-                    if(checkString in currentJobLine):
-
-                        jobInT4=True
-                        predExistsT4.append(checkString+":True")
-                        continue
-            if (jobInT4 == False):
-                checkIfPredExistsInT2(checkString, "TRIGGER")
-
-        elif(len(predecessorInfoTuple)==1):
-            predecessorJobset=predecessorInfoTuple[0].strip()
-            checkString="DEFINE JOBSET ID=("+predecessorJobset+")"
-
-            logger.info("Checking for string: {0} ".format(checkString))
-            with open(tranche4JobsetFile) as t4Jobsets:
-                for line in t4Jobsets:
-                    currentJobLine=line.strip()
-                    if(checkString in currentJobLine):
-
-                        jobInT4=True
-                        predExistsT4.append(checkString+":True")
-                        continue
-            if (jobInT4 == False):
-                checkIfPredExistsInT2(checkString, "JOBSET")
+            if(checkString in t4_array):
+                predExistsT4.append(predJobInfo+":"+"True")
+            else:
+                checkIfPredExistsInT2(predJobInfo,checkString)
 
 
 
 
 
-
-def checkIfPredExistsInT2(checkString,jobType):
-    global jobInT2
+def checkIfPredExistsInT2(predJobInfo,checkString):
     logger = logging.getLogger("JPMC-JMO-Analyzer.predecessorCheck")
-    tranche2JobsFile="C:\JMOFiles\T2_Jobs.txt"
-    tranche2JobsetFile="C:\JMOFiles\T2_Jobset.txt"
-    tranche2TriggerFile = "C:\JMOFiles\T2_Triggers.txt"
-    if(jobType=="JOB"):
-        with open(tranche2JobsFile) as t2Jobs:
-            for line in t2Jobs:
-                currentJobLine=line.strip()
-                if(checkString in currentJobLine):
-                    jobInT2=True
-
-                    continue
-
-    if(jobType=="TRIGGER"):
-        with open(tranche2TriggerFile) as t2Trig:
-            for trigLine in t2Trig:
-                currentTrigger=trigLine.strip()
-                if(checkString in currentTrigger):
-                    jobInT2=True
-
-                    continue
-    if(jobType=="JOBSET"):
-        with open(tranche2JobsetFile) as t2Jobsets:
-            for jobsetLine in t2Jobsets:
-                currentJobset=jobsetLine.strip()
-                if(checkString in currentTrigger):
-                    jobInT2=True
-
-                    continue
-    if(jobInT2==True):
-        logger.info("Check String: {0} exists".format(checkString))
-        predExistsT2.append(checkString+":True")
+    tranche2File="D:\OneDrive-Business\OneDrive - Robert Mark Technologies\JPMC-JMO-Conversion\JMO_Extracts\combinedextracts\P2-Extract.txt"
+    t2_File = open(tranche2File, "r")
+    t2_array = t2_File.readlines()
+    if(checkString in t2_array):
+        predExistsT2.append(predJobInfo+":"+"True")
     else:
-        logger.info("Check String doesnt exist")
-        predExistsT2.append(checkString+":False")
-    logger.info("Checking for {0} complete in T2 files".format(checkString))
+        predNotExist.append(predJobInfo+":"+"False")
 
 def writeToFile(outFile, myLine, mode):
     fileWriter = open(outFile, mode)
