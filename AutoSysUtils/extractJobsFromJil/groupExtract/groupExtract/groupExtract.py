@@ -7,6 +7,8 @@ import os
 import collections
 from collections import defaultdict
 import xlrd
+import JilUtilities
+from JilUtilities import readJil
 
 topBoxList=[]
 topBoxTime=[]
@@ -76,7 +78,7 @@ def readExcelForTopLevel(topLevelFile,sheetName):
             
 
 
-def readJil(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,topBoxTime):
+def readJilForGroup(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,topBoxTime):
     jobName="";
     
     logger = logging.getLogger("JPMC-JilAnalyzer.GetJobsWithGroupAttribute")
@@ -106,7 +108,10 @@ def readJil(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,topBoxTime)
 
 def main():
     logging.config.fileConfig("logging.conf")
-    logger=logging.getLogger("JPMC-JilAnalyzer.main")
+    logger=logging.getLogger("JPMC-GroupExtract.main")
+    readJil("D:\\OneDrive-Business\\OneDrive - Robert Mark Technologies\\JPMC-JMO-Conversion\\JMO_Extracts\\Phase4\\From_Hank\\2017.07.30\\TopBoxDisabled__NonODSEnabled\\JOBS_____.Tranche4.jil","D:\JPMC-JMO\\scripted_outputFiles\\Resources.jil","D:\JPMC-JMO\\scripted_outputFiles\\Machines.jil")
+    readJil("D:\\OneDrive-Business\\OneDrive - Robert Mark Technologies\\JPMC-JMO-Conversion\\JMO_Extracts\\Phase4\\From_Hank\\2017.07.30\\TopBoxDisabled__NonODSEnabled\\JOBS_____.ONDMD.Tranche4.jil","D:\JPMC-JMO\\scripted_outputFiles\\Resources_ONDMD.jil","D:\JPMC-JMO\\scripted_outputFiles\\Machines_ONDMD.jil")
+    logger.info("Done")  
     readExcelForTopLevel("C:\\JMOFiles\\Tranche4JobstoBeConverted-PrebatchandOMNILoadshorty.xlsx","Sheet1")
     print(type(jobsetsInTopBox))
     keyList=jobsetsInTopBox.keys()
@@ -122,7 +127,7 @@ def main():
             logger.info(kvTuple)
             boxStartTime=kvTuple[1].strip()
             boxCalendar=kvTuple[2].strip()
-            readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil",kvTuple[0],key,kvTuple[2],kvTuple[1])
+            readJilForGroup("c:\\jmofiles\\JOBS_____.Tranche4.jil",kvTuple[0],key,kvTuple[2],kvTuple[1])
         writeToFile("C:\\JMOFiles\\TopBoxFile.txt","insert_job: "+key)
         writeToFile("C:\\JMOFiles\\TopBoxFile.txt","job_type: BOX")
         writeToFile("C:\\JMOFiles\\TopBoxFile.txt","date_conditions: 1")
