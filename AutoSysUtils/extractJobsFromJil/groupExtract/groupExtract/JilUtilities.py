@@ -10,12 +10,31 @@ jobsetJobMap=defaultdict(list)
 ignoreLineList=['/*','#  ----------------- DIAGNOSTIC:','#  -----------------','CONVERSION']
 machineList=[]
 resourceList={}
-
+jobCommandMap={}
+jobConditionMap={}
 
 def writeToFile(outputFile, line):
     fileWriter = open(outputFile,"a")
     fileWriter.write(line+"\n")
 
+
+def readJilForCommandAndCondition(jilInputFile):
+    logger=logging.getLogger("JPMC-JilAnalyzer.readJilForCommandAndCondition")
+    logger.info("Reading {0} to extract jobname, command and condition attribute ".format(jilInputFile))
+    with open(jilInputFile) as myJil:
+        for line in myJil:
+            currentJilLine=line.strip()
+            if("insert_job" in currentJilLine):
+                logger.debug(currentJilLine)
+                jobName=currentJilLine.partition("insert_job:")[2].partition("job_type:")[0].strip()
+                jobType=currentJilLine.partition("job_type:")[2].strip()
+            if("command" in currentJilLine):
+                jobCommand=currentJilLine.partition("command:")[2].strip()
+            if("condition:" in currentJilLine):
+                jobCondition=currentJilLine.partition("condition")[2].strip()
+            if(not jobName is None):
+                jobConditionMap[jobName]=jobCondition
+                jobCommandMap[jobName]=jobCommand
 
 def readJil(inputJilFile,resOutFile,machineOutFile):
     logger=logging.getLogger("AutoSysUtilities.JilUtilities.readJil")

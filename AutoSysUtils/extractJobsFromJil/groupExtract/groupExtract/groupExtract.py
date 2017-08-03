@@ -9,9 +9,13 @@ from collections import defaultdict
 import xlrd
 import JilUtilities
 from JilUtilities import readJil
+import cx_Oracle
+
 
 topBoxList=[]
 topBoxTime=[]
+
+
 jobsetsInTopBox=defaultdict(list)  # Contains a collection of the following format:
 # {topbox: box1,box2}
 
@@ -77,6 +81,12 @@ def readExcelForTopLevel(topLevelFile,sheetName):
             print(jobsetsInTopBox)
             
 
+def getConditionsForJob(jobName):
+    logger=logging.getLogger("JPMC-JobAnalyzer.getConditionsForJob")
+    logger.info("Getting conditions for job: {0} ".format(jobName))
+    logger.info("Establishing database connection...")
+
+
 
 def readJilForGroup(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,topBoxTime):
     jobName="";
@@ -106,60 +116,4 @@ def readJilForGroup(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,top
                 writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","run_calendar: "+topBoxCalendar)
                 writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","\n")
 
-def main():
-    logging.config.fileConfig("logging.conf")
-    logger=logging.getLogger("JPMC-GroupExtract.main")
-    print("1. Read JIL File and create missing machine and resource defs")
-    print("2. Read Excel sheet to create Top Level Boxes")
-    
-    user_choice=input("Select an option (1) or (2).")
-    if(user_choice=="1"):
-   
-        readJil("C:\\JMOFiles\\JOBS_____.Tranche4.jil","D:\JPMC-JMO\\scripted_outputFiles\\Resources.jil","D:\JPMC-JMO\\scripted_outputFiles\\Machines.jil")
-        readJil("C:\\JMOFiles\\JOBS_____.ONDMD.Tranche4.jil","D:\JPMC-JMO\\scripted_outputFiles\\Resources_ONDMD.jil","D:\JPMC-JMO\\scripted_outputFiles\\Machines_ONDMD.jil")
-        logger.info("Done")  
-    else:
-        if(user_choice=="2"):
-            readExcelForTopLevel("C:\\JMOFiles\\Tranche4JobstoBeConverted-PrebatchandOMNILoadshorty.xlsx","Sheet1")
-            print(type(jobsetsInTopBox))
-            keyList=jobsetsInTopBox.keys()
-            print(type(keyList))
-            boxStartTime="";
-            boxCalendar="";
-            myKeyList=list(keyList)
-            for key in myKeyList:
-                keyValues=jobsetsInTopBox[key]
-                for kvalue in keyValues:
-                    logger.debug("Value for Key: {0} is {1} ".format(key,kvalue))
-                    kvTuple=kvalue.split('-')
-                    logger.info(kvTuple)
-                    boxStartTime=kvTuple[1].strip()
-                    boxCalendar=kvTuple[2].strip()
-                    readJilForGroup("c:\\jmofiles\\JOBS_____.Tranche4.jil",kvTuple[0],key,kvTuple[2],kvTuple[1])
-                writeToFile("C:\\JMOFiles\\TopBoxFile.txt","insert_job: "+key)
-                writeToFile("C:\\JMOFiles\\TopBoxFile.txt","job_type: BOX")
-                writeToFile("C:\\JMOFiles\\TopBoxFile.txt","date_conditions: 1")
-                writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: "+boxStartTime)
-                writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: "+boxCalendar)
 
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_ods_heartbeat","d68.am.prebatch.maint.base.main.box","base","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_pentaho_carte_reboot","d68.am.prebatch.maint.base.main.box","base","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_gwm_uscore_bus_sys_partition","d68.am.prebatch.maint.us_cmpl.main.box","us_cmpl","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_internal_truncate","d68.am.prebatch.maint.us_cmpl.main.box","us_cmpl","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_mw_stp_archive","d68.am.prebatch.maint.us_mf_fd.main.box","us_mf_fd","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_ods_ao_batch","d68.am.prebatch.maint.usmffdsx.main.box","usmffdsx","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_ods_cs_proc_dt","d68.am.prebatch.maint.usmffdsx.main.box","usmffdsx","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_acats_extracts","d68.am.prebatch.maint.usmffdsx.main.box","usmffdsx","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_add_partition_daily","d68.am.prebatch.maint.usmffdsx.main.box","usmffdsx","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_calendar","d68.am.prebatch.maint.usmffdsx.main.box","usmffdsx","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_gstp_add_partition_daily","d68.am.prebatch.maint.usmffdsx.main.box","usmffdsx","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_gstp_add_partition_daily_ws","d68.am.prebatch.maint.usmffdsx.main.box","usmffdsx","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_internal_add_partition_daily","d68.am.prebatch.maint.usmffdsx.main.box","usmffdsx","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_pb_sac","d68.am.prebatch.maint.usmffdsx.main.box","usmffdsx","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_truncate","d68.am.prebatch.maint.usmffdsx.main.box","usmffdsx","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_uscore_add_partition_daily","d68.am.prebatch.maint.usmffdsx.main.box","usmffdsx","18:45")
-    #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_uscore_pb_sac","d68.am.prebatch.maint.usmffdsx.main.box","usmffdsx","18:45")
-    logger.info("Done")
-
-
-main()
