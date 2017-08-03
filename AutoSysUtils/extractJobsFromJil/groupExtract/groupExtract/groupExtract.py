@@ -9,6 +9,8 @@ from collections import defaultdict
 import xlrd
 import JilUtilities
 from JilUtilities import readJil
+import cx_Oracle
+
 
 topBoxList=[]
 topBoxTime=[]
@@ -76,6 +78,12 @@ def readExcelForTopLevel(topLevelFile,sheetName):
             logger.debug("Cell Data at {0},{1} is {2}".format(rowNum,colNum,cellData))
             print(jobsetsInTopBox)
             
+
+def getConditionsForJob(jobName):
+    logger=logging.getLogger("JPMC-JobAnalyzer.getConditionsForJob")
+    logger.info("Getting conditions for job: {0} ".format(jobName))
+    logger.info("Establishing database connection...")
+
 
 
 def readJilForGroup(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,topBoxTime):
