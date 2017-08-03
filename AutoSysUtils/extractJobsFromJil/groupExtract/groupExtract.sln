@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "groupExtract", "groupExtract\groupExtract.pyproj", "{64353C1F-6AF3-4342-AB3B-1BFDBFD335EC}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "JMO_AE_Utils", "groupExtract\JMO_AE_Utils.pyproj", "{64353C1F-6AF3-4342-AB3B-1BFDBFD335EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

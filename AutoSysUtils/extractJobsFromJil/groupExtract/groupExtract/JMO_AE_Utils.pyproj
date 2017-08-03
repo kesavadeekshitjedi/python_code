@@ -5,7 +5,7 @@
     <ProjectGuid>64353c1f-6af3-4342-ab3b-1bfdbfd335ec</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>groupExtract.py</StartupFile>
+    <StartupFile>JMO_AE_Main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,6 +24,9 @@
   <ItemGroup>
     <Compile Include="groupExtract.py" />
     <Compile Include="JilUtilities.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="JMO_AE_Main.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
