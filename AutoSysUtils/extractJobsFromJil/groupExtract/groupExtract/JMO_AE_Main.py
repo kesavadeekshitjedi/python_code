@@ -14,7 +14,8 @@ import groupExtract
 from groupExtract import *
 
 
-
+# This will be the main module from where all other modules will be imported and called as methods.
+# DK - 04/08/2017
 
 
 def main():
