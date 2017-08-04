@@ -16,6 +16,8 @@ from groupExtract import *
 
 # This will be the main module from where all other modules will be imported and called as methods.
 # DK - 04/08/2017
+# DK - 04/08/2017 - Sub boxes shouldnt have date conditions and calendars.Only top box should
+# As of 08/04/2017 - Top Box needs to be created manually. Looking to fix this.
 
 
 def main():
