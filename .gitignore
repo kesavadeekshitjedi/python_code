@@ -87,3 +87,5 @@ ENV/
 
 # Rope project settings
 .ropeproject
+# Visual Studio gitignore settings
+.suo
