@@ -54,9 +54,9 @@ def main():
             # Creating the TopBoxes here.
             writeToFile("C:\\JMOFiles\\TopBoxFile.txt","insert_job: "+key)
             writeToFile("C:\\JMOFiles\\TopBoxFile.txt","job_type: BOX")
-            #writeToFile("C:\\JMOFiles\\TopBoxFile.txt","date_conditions: 1")
-            #writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: "+boxStartTime)
-            #writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: "+boxCalendar)
+            writeToFile("C:\\JMOFiles\\TopBoxFile.txt","date_conditions: 1")
+            writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: "+boxStartTime)
+            writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: "+boxCalendar)
     if(user_choice=="3"):
         jilFileName=input("Enter the full path to the jil file to read")
         readJilForCommandAndCondition(jilFileName)
