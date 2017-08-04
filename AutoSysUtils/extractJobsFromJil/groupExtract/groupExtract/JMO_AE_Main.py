@@ -51,6 +51,7 @@ def main():
                 boxStartTime=kvTuple[1].strip()
                 boxCalendar=kvTuple[2].strip()
                 readJilForGroup("c:\\jmofiles\\JOBS_____.Tranche4.jil",kvTuple[0],key,kvTuple[2],kvTuple[1])
+            # Creating the TopBoxes here.
             writeToFile("C:\\JMOFiles\\TopBoxFile.txt","insert_job: "+key)
             writeToFile("C:\\JMOFiles\\TopBoxFile.txt","job_type: BOX")
             #writeToFile("C:\\JMOFiles\\TopBoxFile.txt","date_conditions: 1")

@@ -111,9 +111,9 @@ def readJilForGroup(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,top
                 #print("start_times: "+topBoxTime)
                 writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","update_job: "+jobName)
                 writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","box_name: "+topBoxName) 
-                writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","date_conditions: 1")
-                writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","start_times: "+topBoxTime)
-                writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","run_calendar: "+topBoxCalendar)
+                #writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","date_conditions: 1")
+                #writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","start_times: "+topBoxTime)
+                #writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","run_calendar: "+topBoxCalendar)
                 writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","\n")
 
 
