@@ -7,6 +7,7 @@ from collections import defaultdict
 jobList=[]
 jobsetList=[]
 jobsetJobMap=defaultdict(list)
+jobStructureList=[] # Contains the Jobname^command^condition
 ignoreLineList=['/*','#  ----------------- DIAGNOSTIC:','#  -----------------','CONVERSION']
 machineList=[]
 resourceList={}
@@ -32,9 +33,9 @@ def readJilForCommandAndCondition(jilInputFile):
                 jobCommand=currentJilLine.partition("command:")[2].strip()
             if("condition:" in currentJilLine):
                 jobCondition=currentJilLine.partition("condition")[2].strip()
-            if(not jobName is None):
-                jobConditionMap[jobName]=jobCondition
-                jobCommandMap[jobName]=jobCommand
+        if(not jobName is None):
+            jobStructureList.append(jobName+"^"+jobCommand+"^"+jobCondition)
+
 
 def readJil(inputJilFile,resOutFile,machineOutFile):
     logger=logging.getLogger("AutoSysUtilities.JilUtilities.readJil")

@@ -9,7 +9,7 @@ from collections import defaultdict
 import xlrd
 import JilUtilities
 from JilUtilities import readJil
-import cx_Oracle
+#import cx_Oracle
 
 
 topBoxList=[]
