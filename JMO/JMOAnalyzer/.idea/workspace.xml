@@ -18,7 +18,7 @@
       <file leaf-file-name="JMOAnalyzerMain.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JMOAnalyzerMain.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="4403">
               <caret line="270" column="95" lean-forward="false" selection-start-line="270" selection-start-column="95" selection-end-line="270" selection-end-column="95" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -31,21 +31,11 @@
       <file leaf-file-name="extractJobsWithGroup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/extractJobsWithGroup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="28" column="6" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="28" selection-end-column="6" />
+            <state relative-caret-position="187">
+              <caret line="11" column="29" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="28" selection-end-column="6" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="codecs.py" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Program Files/Anaconda3/Lib/codecs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5270">
-              <caret line="310" column="0" lean-forward="false" selection-start-line="310" selection-start-column="0" selection-end-line="310" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -72,12 +62,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="logging.conf" pinned="false" current-in-tab="true">
+      <file leaf-file-name="logging.conf" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/logging.conf">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="15" column="11" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="59" />
+              <caret line="15" column="11" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="59" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="exportGlobalVars.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../AutoSysUtils/exportGlobals/exportGlobalVars.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="copyJobStatus.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../../AutoSysUtils/copyJobStatus.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="733">
+              <caret line="103" column="69" lean-forward="true" selection-start-line="103" selection-start-column="4" selection-end-line="103" selection-end-column="69" />
+              <folding>
+                <element signature="e#1#15#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -104,6 +116,8 @@
         <option value="$PROJECT_DIR$/splitJMOFiles.py" />
         <option value="$PROJECT_DIR$/JMOAnalyzerMain.py" />
         <option value="$PROJECT_DIR$/extractJobsWithGroup.py" />
+        <option value="$PROJECT_DIR$/../../AutoSysUtils/exportGlobals/exportGlobalVars.py" />
+        <option value="$PROJECT_DIR$/../../AutoSysUtils/copyJobStatus.py" />
       </list>
     </option>
   </component>
@@ -136,37 +150,30 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="extractJobsFromJil" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JMOAnalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="JMOAnalyzer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../JMO-Analyzer/JMO-Analyzer/JMO_Analyzer.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../AutoSysUtils/copyJobStatus.py" />
   </component>
-  <component name="RunManager" selected="Python.extractJobsWithGroup">
-    <configuration default="false" name="JMO_Analyzer" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../JMO-Analyzer/JMO-Analyzer" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="JMOAnalyzer" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../JMO-Analyzer/JMO-Analyzer/JMO_Analyzer.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.copyJobStatus">
     <configuration default="false" name="JMOAnalyzerMain" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -214,6 +221,40 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="JMOAnalyzer" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/extractJobsWithGroup.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="exportGlobalVars" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../AutoSysUtils/exportGlobals" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="JMOAnalyzer" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../AutoSysUtils/exportGlobals/exportGlobalVars.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="copyJobStatus" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../AutoSysUtils" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="JMOAnalyzer" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../AutoSysUtils/copyJobStatus.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -352,18 +393,20 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="Python.JMO_Analyzer" />
-      <item index="1" class="java.lang.String" itemvalue="Python.JMOAnalyzerMain" />
-      <item index="2" class="java.lang.String" itemvalue="Python.GetDuplicateTriggers" />
-      <item index="3" class="java.lang.String" itemvalue="Python.extractJobsWithGroup" />
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Python.JMOAnalyzerMain" />
+      <item index="1" class="java.lang.String" itemvalue="Python.GetDuplicateTriggers" />
+      <item index="2" class="java.lang.String" itemvalue="Python.extractJobsWithGroup" />
+      <item index="3" class="java.lang.String" itemvalue="Python.exportGlobalVars" />
+      <item index="4" class="java.lang.String" itemvalue="Python.copyJobStatus" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.extractJobsWithGroup" />
-        <item index="1" class="java.lang.String" itemvalue="Python.JMOAnalyzerMain" />
-        <item index="2" class="java.lang.String" itemvalue="Python.GetDuplicateTriggers" />
-        <item index="3" class="java.lang.String" itemvalue="Python.JMO_Analyzer" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.copyJobStatus" />
+        <item index="1" class="java.lang.String" itemvalue="Python.exportGlobalVars" />
+        <item index="2" class="java.lang.String" itemvalue="Python.extractJobsWithGroup" />
+        <item index="3" class="java.lang.String" itemvalue="Python.JMOAnalyzerMain" />
+        <item index="4" class="java.lang.String" itemvalue="Python.GetDuplicateTriggers" />
       </list>
     </recent_temporary>
   </component>
@@ -382,18 +425,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14857745" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.19732441" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="2232" y="183" width="1391" height="775" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.19732441" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="568" y="461" width="1069" height="352" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973656" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.4214047" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="61" y="420" width="1826" height="501" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.4214047" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="28" y="618" width="1826" height="501" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -434,8 +477,13 @@
           <line>8</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../AutoSysUtils/exportGlobals/exportGlobalVars.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="32" />
+      <option name="time" value="34" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -446,6 +494,40 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://C:/Program Files/Anaconda3/Lib/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5270">
+          <caret line="310" column="0" lean-forward="false" selection-start-line="310" selection-start-column="0" selection-end-line="310" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/splitJMOFiles.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetDuplicateTriggers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="80" lean-forward="false" selection-start-line="24" selection-start-column="2" selection-end-line="25" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logging.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/JMOAnalyzerMain.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -791,17 +873,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Program Files/Anaconda3/Lib/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5270">
-          <caret line="310" column="0" lean-forward="false" selection-start-line="310" selection-start-column="0" selection-end-line="310" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JMOAnalyzerMain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="4403">
           <caret line="270" column="95" lean-forward="false" selection-start-line="270" selection-start-column="95" selection-end-line="270" selection-end-column="95" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -828,21 +902,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/logging.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="11" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files/Anaconda3/Lib/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="835">
+          <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/extractJobsWithGroup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="6" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="28" selection-end-column="6" />
+        <state relative-caret-position="187">
+          <caret line="11" column="29" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="28" selection-end-column="6" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logging.conf">
+    <entry file="file://$PROJECT_DIR$/../../AutoSysUtils/exportGlobals/exportGlobalVars.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="11" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="59" />
+        <state relative-caret-position="425">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_bundle/pydev_monkey_qt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="86" column="16" lean-forward="true" selection-start-line="86" selection-start-column="16" selection-end-line="86" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../AutoSysUtils/copyJobStatus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="733">
+          <caret line="103" column="69" lean-forward="true" selection-start-line="103" selection-start-column="4" selection-end-line="103" selection-end-column="69" />
+          <folding>
+            <element signature="e#1#15#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
