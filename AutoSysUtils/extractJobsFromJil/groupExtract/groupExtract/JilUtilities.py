@@ -3,6 +3,8 @@ import logging
 import logging.config
 import collections
 from collections import defaultdict
+from workerUtilities import writeToFile
+import os
 
 jobList=[]
 jobsetList=[]
@@ -13,10 +15,8 @@ machineList=[]
 resourceList={}
 jobCommandMap={}
 jobConditionMap={}
+boxRelationMap=defaultdict(list)
 
-def writeToFile(outputFile, line):
-    fileWriter = open(outputFile,"a")
-    fileWriter.write(line+"\n")
 
 
 def readJilForCommandAndCondition(jilInputFile):
@@ -35,6 +35,46 @@ def readJilForCommandAndCondition(jilInputFile):
                 jobCondition=currentJilLine.partition("condition")[2].strip()
         if(not jobName is None):
             jobStructureList.append(jobName+"^"+jobCommand+"^"+jobCondition)
+
+def readJilForBoxLevelStructure(jilInputFile,boxPattern):
+    # Input file should be a file that has the output of autorep -J ALL -q 
+    logger=logging.getLogger("JMO_AE_Utils.JilUtilities.readJilForBoxLevelStructure")
+    logger.info("Reading {0} to break down jil by Box and then list the jobs that are not in a box".format(jilInputFile))
+    pathToFile=(os.path.dirname(os.path.abspath(jilInputFile)))
+    logger.debug("Full path to {0} is {1}".format(jilInputFile,pathToFile))
+    attributeList=[]
+    foundJob=False
+    if(boxPattern=="*"):
+        boxFile=pathToFile+"BoxFile.jil"
+    if(not boxPattern=="*"):
+        boxFile=pathToFile+"BoxFile"+boxPattern+".jil"
+    logger.info("Established file paths and target file location. Now reading jil file...")
+    with open(jilInputFile) as myJil:
+        for line in myJil:
+            currentJilLine=line.strip()
+            if("insert_job:" in currentJilLine and not ("/*") in currentJilLine and not ("# ") in currentJilLine):
+                attributeList=[]
+                foundJob=True
+                logger.info("New Job Definition line found. ")
+                logger.debug("Current Jil Line: {0}".format(currentJilLine))
+                if("job_type" in currentJilLine):
+                    jobName=currentJilLine.partition("insert_job:")[2].partition("job_type")[0].strip()
+                    jobType=currentJilLine.partition("job_type:")[2].strip()
+                else:
+                    jobName=currentJilLine.partition("insert_job:")[2].strip()
+
+            else:
+                if(not ("/*") in currentJilLine and not ("# ") in currentJilLine and not currentJilLine==""):
+                    logger.info("Retrieving job attributes...")
+                    attributeTuple=currentJilLine.split(":")
+                    attributeName=attributeTuple[0].strip()
+                    attributeValue=attributeTuple[1].strip()
+                    attributeList.append(currentJilLine)
+            if(("/*") in currentJilLine and ("# ") in currentJilLine):
+                foundJob=False
+                logger.debug("All attributes should have been retrieved.")
+                
+
 
 
 def readJil(inputJilFile,resOutFile,machineOutFile):

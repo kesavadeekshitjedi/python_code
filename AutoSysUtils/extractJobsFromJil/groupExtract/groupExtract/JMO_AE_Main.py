@@ -10,8 +10,12 @@ import xlrd
 import JilUtilities
 from JilUtilities import readJil
 from JilUtilities import readJilForCommandAndCondition
+from JilUtilities import readJilForBoxLevelStructure
 import groupExtract
 from groupExtract import *
+import copyJobStatus
+from copyJobStatus import *
+from workerUtilities import writeToFile
 
 
 # This will be the main module from where all other modules will be imported and called as methods.
@@ -26,8 +30,8 @@ def main():
     print("1. Read JIL File and create missing machine and resource defs")
     print("2. Read Excel sheet to create Top Level Boxes")
     print("3. Read jil and extract command and condition for update_job file")
-    
-    user_choice=input("Select an option (1) or (2) or (3).")
+    print("4. Copy Job Status")
+    user_choice=input("Select an option (1) or (2) or (3) or (4).")
     if(user_choice=="1"):
    
         readJil("C:\\JMOFiles\\JOBS_____.Tranche4.jil","D:\JPMC-JMO\\scripted_outputFiles\\Resources.jil","D:\JPMC-JMO\\scripted_outputFiles\\Machines.jil")
@@ -55,12 +59,15 @@ def main():
             writeToFile("C:\\JMOFiles\\TopBoxFile.txt","insert_job: "+key)
             writeToFile("C:\\JMOFiles\\TopBoxFile.txt","job_type: BOX")
             writeToFile("C:\\JMOFiles\\TopBoxFile.txt","date_conditions: 1")
-            writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: "+boxStartTime)
-            writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: "+boxCalendar)
+            writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: \""+boxStartTime+"\"")
+            writeToFile("C:\\JMOFiles\\TopBoxFile.txt","run_calendar: "+boxCalendar)
     if(user_choice=="3"):
         jilFileName=input("Enter the full path to the jil file to read")
+        readJilForBoxLevelStructure(jilFileName,"*")
         readJilForCommandAndCondition(jilFileName)
-
+    if(user_choice=="4"):
+        readJilFile("D:\\autosysstatus\\jobstatus.txt")
+        writeUpdatedJobStatusFile("D:\\autosysstatus\\jobdef_harris.txt")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_ods_heartbeat","d68.am.prebatch.maint.base.main.box","base","18:45")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_pentaho_carte_reboot","d68.am.prebatch.maint.base.main.box","base","18:45")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_gwm_uscore_bus_sys_partition","d68.am.prebatch.maint.us_cmpl.main.box","us_cmpl","18:45")

@@ -22,11 +22,20 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="copyJobStatus.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="extractGlobals.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="groupExtract.py" />
     <Compile Include="JilUtilities.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="JMO_AE_Main.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="workerUtilities.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

@@ -9,6 +9,7 @@ from collections import defaultdict
 import xlrd
 import JilUtilities
 from JilUtilities import readJil
+from workerUtilities import writeToFile
 #import cx_Oracle
 
 
@@ -19,9 +20,7 @@ topBoxTime=[]
 jobsetsInTopBox=defaultdict(list)  # Contains a collection of the following format:
 # {topbox: box1,box2}
 
-def writeToFile(outputFile, line):
-    fileWriter = open(outputFile,"a")
-    fileWriter.write(line+"\n")
+
 
 def readExcelForTopLevel(topLevelFile,sheetName):
     logger = logging.getLogger("JPMC-JilAnalyzer.readExcelForTopLevel")

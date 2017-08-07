@@ -2,6 +2,7 @@ import logging
 import logging.config
 import re
 from datetime import datetime
+from workerUtilities import writeToFile
 
 def createGlobalsExport(globalImportFile):
     with open(globalImportFile) as myGlobalVarInput:
@@ -18,11 +19,3 @@ def createGlobalsExport(globalImportFile):
             print(myLine)
             writeToFile(myLine,"D:\\exportGlobalsFile_Harris.txt")
 
-def writeToFile(outputFile, line):
-    fileWriter = open(outputFile,"a")
-    fileWriter.write(line)
-
-def main():
-    createGlobalsExport("D:\\newglobals.txt")
-
-main()

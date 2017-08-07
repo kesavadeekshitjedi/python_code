@@ -5,6 +5,7 @@ from shutil import copyfile
 import time
 from datetime import datetime
 import re
+from workerUtilities import writeToFile
 
 
 # This script takes the formatted output of autorep -J ALL -n and copies the statuses using the status attribute
@@ -18,9 +19,6 @@ jobStatusList=['IN','SU','OI','OH','IN/NE','ST','RU','TE','FA']
 pickJobStatus=['SU','OI','OH','FA','TE','IN/NE']
 jobStatusDictMap={'OI':'ON_ICE','OH':"ON_HOLD",'TE':'TERMINATED','IN/NE':'NO_EXEC','SU':'SUCCESS','FA':'FAILURE'}
 
-def writeToFile(outputFile,jilLine):
-	fileWriter=open(outputFile,"a")
-	fileWriter.write(jilLine)
 
 
 def readJilFile(jobStatusFile):
@@ -99,8 +97,3 @@ def createSQLConnection(sqlServerHost,sqlServerPort,sqlServerUser,sqlServerPass,
     logging.info("Connecting to SQL Server...")
     con = pypyodbc.connect('DRIVER={SQL Server};SERVER=Prod1\SQL2008R2;DATABASE=SDE;UID=sa;PWD=sa')
 
-def main():
-    readJilFile("D:\\autosysstatus\\jobstatus.txt")
-    writeUpdatedJobStatusFile("D:\\autosysstatus\\jobdef_harris.txt")
-
-main()
