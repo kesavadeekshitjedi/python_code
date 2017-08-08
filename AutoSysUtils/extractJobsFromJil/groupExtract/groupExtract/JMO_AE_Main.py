@@ -67,7 +67,7 @@ def main():
         readJilForCommandAndCondition(jilFileName)
     if(user_choice=="4"):
         readJilFile("D:\\autosysstatus\\jobstatus.txt")
-        writeUpdatedJobStatusFile("D:\\autosysstatus\\jobdef_harris.txt")
+        writeUpdatedJobStatusFile("D:\\autosysstatus\\jobdef.txt")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_ods_heartbeat","d68.am.prebatch.maint.base.main.box","base","18:45")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_pentaho_carte_reboot","d68.am.prebatch.maint.base.main.box","base","18:45")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_gwm_uscore_bus_sys_partition","d68.am.prebatch.maint.us_cmpl.main.box","us_cmpl","18:45")

@@ -23,7 +23,7 @@ jobsetsInTopBox=defaultdict(list)  # Contains a collection of the following form
 
 
 def readExcelForTopLevel(topLevelFile,sheetName):
-    logger = logging.getLogger("JPMC-JilAnalyzer.readExcelForTopLevel")
+    logger = logging.getLogger("JMO_AE_Utils.groupExtract.readExcelForTopLevel")
     logging.info("Reading top level file...")
     #Oopening Workbook
     workbook = xlrd.open_workbook(topLevelFile)
@@ -81,7 +81,7 @@ def readExcelForTopLevel(topLevelFile,sheetName):
             
 
 def getConditionsForJob(jobName):
-    logger=logging.getLogger("JPMC-JobAnalyzer.getConditionsForJob")
+    logger=logging.getLogger("JMO_AE_Utils.groupExtract.getConditionsForJob")
     logger.info("Getting conditions for job: {0} ".format(jobName))
     logger.info("Establishing database connection...")
 
@@ -90,7 +90,7 @@ def getConditionsForJob(jobName):
 def readJilForGroup(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,topBoxTime):
     jobName="";
     
-    logger = logging.getLogger("JPMC-JilAnalyzer.GetJobsWithGroupAttribute")
+    logger = logging.getLogger("JMO_AE_Utils.groupExtract.readJilForGroup")
     
     with open(jilInputFile) as jilInput:
         for line in jilInput:

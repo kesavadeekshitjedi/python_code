@@ -73,6 +73,7 @@ def readJilForBoxLevelStructure(jilInputFile,boxPattern):
             if(("/*") in currentJilLine and ("# ") in currentJilLine):
                 foundJob=False
                 logger.debug("All attributes should have been retrieved.")
+
                 
 
 
