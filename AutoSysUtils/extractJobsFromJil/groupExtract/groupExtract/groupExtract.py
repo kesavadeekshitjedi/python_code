@@ -89,7 +89,7 @@ def getConditionsForJob(jobName):
 
 def readJilForGroup(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,topBoxTime):
     jobName="";
-    
+    currentTime=time.strftime("%Y%m%d-%HH%M%S")
     logger = logging.getLogger("JMO_AE_Utils.groupExtract.readJilForGroup")
     # This file creates the jil to move the boxes into the Top Box.
     with open(jilInputFile) as jilInput:
@@ -108,11 +108,11 @@ def readJilForGroup(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,top
                 print("box_name: "+topBoxName)
                 print("date_conditions: 0")
                 #print("start_times: "+topBoxTime)
-                writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","update_job: "+jobName)
-                writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","box_name: "+topBoxName) 
-                writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","date_conditions: 0")
+                writeToFile("C:\\JMOFiles\\TopBoxFiles\\TopBox_"+topBoxName+"-"+currentTime+".jil","update_job: "+jobName)
+                writeToFile("C:\\JMOFiles\\TopBoxFiles\\TopBox_"+topBoxName+"-"+currentTime+".jil","box_name: "+topBoxName) 
+                writeToFile("C:\\JMOFiles\\TopBoxFiles\\TopBox_"+topBoxName+"-"+currentTime+".jil","date_conditions: 0")
                 #writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","start_times: "+topBoxTime)
                 #writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","run_calendar: "+topBoxCalendar)
-                writeToFile("C:\\JMOFiles\TopBox_"+topBoxName+".jil","\n")
+                writeToFile("C:\\JMOFiles\\TopBoxFiles\\TopBox_"+topBoxName+"-"+currentTime+".jil","\n")
 
 

@@ -18,6 +18,7 @@ from copyJobStatus import *
 from workerUtilities import writeToFile
 
 
+
 # This will be the main module from where all other modules will be imported and called as methods.
 # DK - 04/08/2017
 # DK - 04/08/2017 - Sub boxes shouldnt have date conditions and calendars.Only top box should
@@ -39,6 +40,7 @@ def main():
         logger.info("Done")  
     
     if(user_choice=="2"):
+        currentTime=time.strftime("%Y%m%d-%H%M%S")
         readExcelForTopLevel("C:\\JMOFiles\\Tranche4JobstoBeConverted-PrebatchandOMNILoad.xlsx","Sheet1")
         print(type(jobsetsInTopBox))
         keyList=jobsetsInTopBox.keys()
@@ -56,10 +58,10 @@ def main():
                 boxCalendar=kvTuple[2].strip()
                 readJilForGroup("c:\\jmofiles\\JOBS_____.Tranche4.jil",kvTuple[0],key,kvTuple[2],kvTuple[1])
             # Creating the TopBoxes here.
-            writeToFile("C:\\JMOFiles\\TopBoxFile.txt","insert_job: "+key)
-            writeToFile("C:\\JMOFiles\\TopBoxFile.txt","job_type: BOX")
-            writeToFile("C:\\JMOFiles\\TopBoxFile.txt","date_conditions: 1")
-            writeToFile("C:\\JMOFiles\\TopBoxFile.txt","start_times: \""+boxStartTime+"\"")
+            writeToFile("C:\\JMOFiles\\TopBoxFiles\\TopBoxFile_"+currentTime+".txt" ,"insert_job: "+key)
+            writeToFile("C:\\JMOFiles\\TopBoxFiles\\TopBoxFile_"+currentTime+".txt","job_type: BOX")
+            writeToFile("C:\\JMOFiles\\TopBoxFiles\\TopBoxFile_"+currentTime+".txt","date_conditions: 1")
+            writeToFile("C:\\JMOFiles\\TopBoxFiles\\TopBoxFile_"+currentTime+".txt","start_times: \""+boxStartTime+"\"")
             writeToFile("C:\\JMOFiles\\TopBoxFile.txt","run_calendar: "+boxCalendar)
     if(user_choice=="3"):
         jilFileName=input("Enter the full path to the jil file to read")

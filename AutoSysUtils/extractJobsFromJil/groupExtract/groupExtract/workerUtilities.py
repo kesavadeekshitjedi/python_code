@@ -1,6 +1,6 @@
 import re
 import logging
-import pypyodbc
+#import pypyodbc
 import logging.config
 
 def writeToFile(outputFile, line):
