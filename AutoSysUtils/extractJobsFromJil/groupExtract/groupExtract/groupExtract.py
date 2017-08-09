@@ -10,7 +10,7 @@ import xlrd
 import JilUtilities
 from JilUtilities import readJil
 from workerUtilities import writeToFile
-import cx_Oracle
+
 
 
 topBoxList=[]
