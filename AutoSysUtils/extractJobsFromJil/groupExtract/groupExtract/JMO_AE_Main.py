@@ -15,9 +15,11 @@ import groupExtract
 from groupExtract import *
 import copyJobStatus
 from copyJobStatus import *
-from workerUtilities import writeToFile
+from workerUtilities import *
 
 
+
+jobConditionMapMain=defaultdict(list)
 
 # This will be the main module from where all other modules will be imported and called as methods.
 # DK - 04/08/2017
@@ -73,6 +75,14 @@ def main():
         writeUpdatedJobStatusFile("D:\\autosysstatus\\jobdef.txt")
     if(user_choice=="5"):
         readJilForFileWatchers("C:\\JMOFiles\\FTJobs_JPMC.txt","0")
+    if(user_choice=="6"):
+        p=Properties()
+        p.load(open("C:\\JMOFiles\\jmo2ae.properties"))
+        p.list()
+        p.items()
+        print(p[database.hostname])
+        getConditionsForJob("LUMOS","1521","aedbadmin","Test1234","SP3","cbos.perform.monthly.batch.check.008.r")
+        #createOracleConnection("LUMOS","1521","aedbadmin","Test1234","SP3")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_ods_heartbeat","d68.am.prebatch.maint.base.main.box","base","18:45")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_pentaho_carte_reboot","d68.am.prebatch.maint.base.main.box","base","18:45")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_gwm_uscore_bus_sys_partition","d68.am.prebatch.maint.us_cmpl.main.box","us_cmpl","18:45")
