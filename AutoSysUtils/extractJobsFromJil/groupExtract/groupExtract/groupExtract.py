@@ -81,7 +81,8 @@ def readExcelForTopLevel(topLevelFile,sheetName):
             
             logger.debug("Cell Data at {0},{1} is {2}".format(rowNum,colNum,cellData))
             print(jobsetsInTopBox)
-    writeToFile("C:\\JMOFiles\\TopLevelBoxes_Jobsets.txt","test")
+    for job in jobsetsInTopBox:
+        writeToFile("C:\\JMOFiles\\TopLevelBoxes_Jobsets.txt",job)
             
 
 def readJilForFileWatchers(jilFileName,convertJobNames):
