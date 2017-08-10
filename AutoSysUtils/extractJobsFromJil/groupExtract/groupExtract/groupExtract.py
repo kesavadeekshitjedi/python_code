@@ -136,6 +136,8 @@ def readJilForFileWatchers(jilFileName,convertJobNames):
             if(not ftCalendar=="" and ftDaysOfWeek=="" ):
                 calendarJobList=[]
                 calendarJobList=fileTriggerCalendarMap[ftCalendar]
+                calendarList=[]
+                calendarList=list(fileTriggerCalendarMap.keys())
                 if(not ftjobName in calendarJobList):
                     logger.info("Adding job {0} to calendar: {1}".format(ftjobName,ftCalendar))
                     
@@ -150,11 +152,29 @@ def readJilForFileWatchers(jilFileName,convertJobNames):
     if(convertJobNames=="0"):
         logger.info("Not converting job names to have the extension from the watch_file attribute at the end")
         logger.info("Setting FT in Top level boxes per calendar")
+        calendarList=list(fileTriggerCalendarMap.keys())
+        logger.info("Total number of calendars is {0}".format(calendarList.count))
+        for calendarName in calendarList:
+            writeToFile("C:\\JMOFiles\\TopBox\\Files\\Trigger-File.txt","insert_job: "+calendarName+".ftbox") # Top box created
+            writeToFile("C:\\JMOFiles\\TopBox\\Files\\Trigger-File.txt","job_type: BOX ") # Top box created
+            writeToFile("C:\\JMOFiles\\TopBox\\Files\\Trigger-File.txt","run_calendar: "+calendarName) # Top box created
+            writeToFile("C:\\JMOFiles\\TopBox\\Files\\Trigger-File.txt","start_times: 19:00") # Top box created
+            writeToFile("C:\\JMOFiles\\TopBox\\Files\\Trigger-File.txt","\n")
+            logger.info("Getting Triggers for calendar {0}".format(calendarName))
+            myTriggerList=fileTriggerCalendarMap[calendarName]
+            for triggerName in myTriggerList:
+                writeToFile("C:\\JMOFiles\\TopBox\\Files\\Trigger-File.txt","update_job: "+triggerName)
+                writeToFile("C:\\JMOFiles\\TopBox\\Files\\Trigger-File.txt","box_name: "+calendarName+".ftbox")
+                writeToFile("C:\\JMOFiles\\TopBox\\Files\\Trigger-File.txt","date_conditions: 0")
+                writeToFile("C:\\JMOFiles\\TopBox\\Files\\Trigger-File.txt","\n")
+                writeToFile("C:\\JMOFiles\\TopBox\\Files\\Trigger-File.txt","\n")
+
 
     if(convertJobNames=="1"):
         logger.info("Converting job names to have the extension from the watch_file attribute at the end")
         logger.info("Setting FT in Top level boxes per calendar")
-
+        calendarList=list(fileTriggerCalendarMap.keys())
+        logger.info("Total number of calendars is {0}".format(calendarList.count))
 
 def readJilForGroup(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,topBoxTime):
     jobName=""

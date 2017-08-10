@@ -2,9 +2,18 @@ import re
 import logging
 #import pypyodbc
 import logging.config
+import os
 
 def writeToFile(outputFile, line):
-    fileWriter = open(outputFile,"a")
+    file_folder=os.path.dirname(outputFile)
+    if not os.path.exists(file_folder):
+        os.makedirs(file_folder)
+    try:
+       
+        fileWriter=open(outputFile,"a")
+    except FileNotFoundError:
+
+        fileWriter = open(outputFile,"w")
     fileWriter.write(line+"\n")
 
 
