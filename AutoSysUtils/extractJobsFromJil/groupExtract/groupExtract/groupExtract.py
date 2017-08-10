@@ -15,6 +15,9 @@ from workerUtilities import writeToFile
 
 topBoxList=[]
 topBoxTime=[]
+fileTriggerList=[]
+fileTriggerMap={}
+fileTriggerCalendarMap=defaultdict(list)
 
 
 jobsetsInTopBox=defaultdict(list)  # Contains a collection of the following format:
@@ -78,6 +81,7 @@ def readExcelForTopLevel(topLevelFile,sheetName):
             
             logger.debug("Cell Data at {0},{1} is {2}".format(rowNum,colNum,cellData))
             print(jobsetsInTopBox)
+            writeToFile("C:\\JMOFiles\\TopLevelBoxes_Jobsets.txt")
             
 
 def getConditionsForJob(jobName):
@@ -85,10 +89,75 @@ def getConditionsForJob(jobName):
     logger.info("Getting conditions for job: {0} ".format(jobName))
     logger.info("Establishing database connection...")
 
+def readJilForFileWatchers(jilFileName,convertJobNames):
+    logger=logging.getLogger("JMO_AE_Utils.groupExtract.readJilForFileWatchers")
+    ftjobName=""
+    ftWatchFile=""
+    ftCalendar=""
+    ftDaysOfWeek=""
+    ftStartTimes=""
+    ftStartMins=""
+    jobFound=False
+    logger.info("Reading {0} to get all File Triggers and Filewatchers".format(jilFileName))
+    with open(jilFileName) as myFTJil:
+        for line in myFTJil:
+            currentLine=line.strip()
+            if(("insert_job:" in currentLine and "job_type: FT" in currentLine) or ("insert_job:" in currentLine and "job_type: FW" in currentLine)):
+                jobFound=True
+                logger.info("Found FT/FW job")
+                logger.debug(currentLine)
+                ftjobName=currentLine.partition("insert_job:")[2].partition("job_type:")[0].strip()
+                logger.info("FT/FW job name: {0}".format(ftjobName))
+
+            if(("watch_file:" in currentLine and jobFound==True and (not "#" in currentLine))):
+
+                logger.info("watch_file attribute found")
+                ftWatchFile=currentLine.partition("watch_file:")[2].strip()
+            if("run_calendar:" in currentLine and jobFound==True and (not "#" in currentLine)):
+                logger.info("Run calendar associated with FT/FW job")
+                ftCalendar=currentLine.partition("run_calendar:")[2].strip()
+               
+            if("days_of_week:" in currentLine and jobFound==True and (not "#" in currentLine)):
+                logger.info("days_of_week attribute associated with FW/FT job")
+                ftDaysOfWeek=currentLine.partition("days_of_week:")[2].strip()
+
+            if("start_times:" in currentLine and jobFound==True and (not "#" in currentLine)):
+                logger.info("start_times attribute associated with FW/FT job")
+                ftStartTimes=currentLine.partition("start_times:")[2].strip()
+
+            if("start_mins:" in currentLine and jobFound==True and (not "#" in currentLine)):
+                logger.info("start_mins attribute associated with FW/FT job")
+                ftStartMins=currentLine.partition("start_mins:")[2].strip()
+
+            if(jobFound==True and not ftWatchFile=="" and ftjobName not in fileTriggerList):
+                logger.info("Job {0} added to fileTriggerList".format(ftjobName))
+                fileTriggerList.append(ftjobName)
+                fileTriggerMap[ftjobName]=ftWatchFile
+            if(not ftCalendar=="" and ftDaysOfWeek=="" ):
+                calendarJobList=[]
+                calendarJobList=fileTriggerCalendarMap[ftCalendar]
+                if(not ftjobName in calendarJobList):
+                    logger.info("Adding job {0} to calendar: {1}".format(ftjobName,ftCalendar))
+                    
+                    calendarJobList.append(ftjobName)
+                    fileTriggerCalendarMap[ftCalendar]=calendarJobList
+            if(ftCalendar=="" and not ftDaysOfWeek==""):
+                calendarJobList=[]
+                calendarJobList=fileTriggerCalendarMap[ftDaysOfWeek]
+                calendarJobList.append(ftjobName)
+                fileTriggerCalendarMap[ftCalendar]=calendarJobList
+    
+    if(convertJobNames=="0"):
+        logger.info("Not converting job names to have the extension from the watch_file attribute at the end")
+        logger.info("Setting FT in Top level boxes per calendar")
+
+    if(convertJobNames=="1"):
+        logger.info("Converting job names to have the extension from the watch_file attribute at the end")
+        logger.info("Setting FT in Top level boxes per calendar")
 
 
 def readJilForGroup(jilInputFile,groupSearchString,topBoxName,topBoxCalendar,topBoxTime):
-    jobName="";
+    jobName=""
     currentTime=time.strftime("%Y%m%d-%HH%M%S")
     logger = logging.getLogger("JMO_AE_Utils.groupExtract.readJilForGroup")
     # This file creates the jil to move the boxes into the Top Box.

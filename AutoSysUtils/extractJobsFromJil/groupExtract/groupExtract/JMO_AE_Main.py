@@ -32,6 +32,7 @@ def main():
     print("2. Read Excel sheet to create Top Level Boxes")
     print("3. Read jil and extract command and condition for update_job file")
     print("4. Copy Job Status")
+    print("5. Set Filewatchers in top level box by Calendar.")
     user_choice=input("Select an option (1) or (2) or (3) or (4).")
     if(user_choice=="1"):
    
@@ -70,6 +71,8 @@ def main():
     if(user_choice=="4"):
         readJilFile("D:\\autosysstatus\\jobstatus.txt")
         writeUpdatedJobStatusFile("D:\\autosysstatus\\jobdef.txt")
+    if(user_choice=="5"):
+        readJilForFileWatchers("C:\\JMOFiles\\FTJobs_JPMC.txt","0")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_ods_heartbeat","d68.am.prebatch.maint.base.main.box","base","18:45")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_pentaho_carte_reboot","d68.am.prebatch.maint.base.main.box","base","18:45")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_gwm_uscore_bus_sys_partition","d68.am.prebatch.maint.us_cmpl.main.box","us_cmpl","18:45")
