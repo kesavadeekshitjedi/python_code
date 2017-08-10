@@ -3,7 +3,7 @@ import logging
 import logging.config
 import collections
 from collections import defaultdict
-from workerUtilities import writeToFile
+from workerUtilities import *
 import os
 
 jobList=[]

@@ -9,8 +9,8 @@ from collections import defaultdict
 import xlrd
 import JilUtilities
 from JilUtilities import readJil
-from workerUtilities import writeToFile
-
+from workerUtilities import *
+import cx_Oracle
 
 
 topBoxList=[]
@@ -83,11 +83,6 @@ def readExcelForTopLevel(topLevelFile,sheetName):
             print(jobsetsInTopBox)
     writeToFile("C:\\JMOFiles\\TopLevelBoxes_Jobsets.txt")
             
-
-def getConditionsForJob(jobName):
-    logger=logging.getLogger("JMO_AE_Utils.groupExtract.getConditionsForJob")
-    logger.info("Getting conditions for job: {0} ".format(jobName))
-    logger.info("Establishing database connection...")
 
 def readJilForFileWatchers(jilFileName,convertJobNames):
     logger=logging.getLogger("JMO_AE_Utils.groupExtract.readJilForFileWatchers")
