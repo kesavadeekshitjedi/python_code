@@ -45,7 +45,7 @@ def readExcelForTopLevel(topLevelFile,sheetName):
         for colNum in range(0,4): # Reading only the first 4 columns. if we have to read all columns, then replace with the colCount variable.
             logger.info("Reading cell {0},{1}".format(rowNum,colNum))
             cellData=workSheet.cell(rowNum,colNum).value.strip()
-            logger.info(type(colNum))
+            #logger.info(type(colNum))
             if(colNum==0):
                 logger.info("Reading top box name")
                 topBoxName=workSheet.cell(rowNum,colNum).value.strip()
@@ -82,7 +82,7 @@ def readExcelForTopLevel(topLevelFile,sheetName):
             logger.debug("Cell Data at {0},{1} is {2}".format(rowNum,colNum,cellData))
             print(jobsetsInTopBox)
     for job in jobsetsInTopBox:
-        writeToFile("C:\\JMOFiles\\TopLevelBoxes_Jobsets.txt",job)
+        writeToFile("C:\\JMOFiles\\Files\\TopLevelBoxes_Jobsets.txt",job)
             
 
 def readJilForFileWatchers(jilFileName,convertJobNames):
