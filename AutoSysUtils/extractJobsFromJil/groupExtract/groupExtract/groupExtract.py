@@ -83,6 +83,7 @@ def readExcelForTopLevel(topLevelFile,sheetName):
             print(jobsetsInTopBox)
     for job in jobsetsInTopBox:
         writeToFile("C:\\JMOFiles\\Files\\TopLevelBoxes_Jobsets.txt",job)
+        # This is just a file to see if the top level boxes are being identified properly.
             
 
 def readJilForFileWatchers(jilFileName,convertJobNames):
