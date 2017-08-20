@@ -4,7 +4,7 @@ import re
 from datetime import datetime
 from workerUtilities import writeToFile
 
-def createGlobalsExport(globalImportFile):
+def createGlobalsExport(globalImportFile,globalOutputFile):
     logger=logging.getLogger("JMO_AE_Utils.createGlobalsExport")
     with open(globalImportFile) as myGlobalVarInput:
         for globalLine in myGlobalVarInput:
@@ -17,6 +17,6 @@ def createGlobalsExport(globalImportFile):
             #print("Variable Name: "+globalVarName)
             #print("Variable Value: "+globalVarValue)
             myLine="sendevent -E SET_GLOBAL -G "+globalVarName+"="+globalVarValue
-            #print(myLine)
-            writeToFile("D:\\exportGlobalsFile_Harris.txt",myLine)
+            print(myLine)
+            writeToFile(globalOutputFile,myLine)
 

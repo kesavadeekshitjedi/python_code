@@ -15,7 +15,7 @@ from workerUtilities import writeToFile
 
 jobNameList=[]
 jobNameStatusDict = {}
-jobStatusList=['IN','SU','OI','OH','IN/NE','ST','RU','TE','FA']
+jobStatusList=['IN','SU','OI','OH','IN/NE','ST','RU','TE','FA','AC']
 pickJobStatus=['SU','OI','OH','FA','TE','IN/NE']
 jobStatusDictMap={'OI':'ON_ICE','OH':"ON_HOLD",'TE':'TERMINATED','IN/NE':'NO_EXEC','SU':'SUCCESS','FA':'FAILURE'}
 
@@ -34,6 +34,8 @@ def readJilFile(jobStatusFile):
             currentLineTuple=currentLine.split()
             #logger.debug(currentLineTuple)
             jobName=currentLineTuple[0].strip()
+            if(jobName=="tuc1pwtch_d210"):
+                logger.info("Exception..")
             #logger.debug("Job Identified: {0}".format(jobName))
             if(currentLineTuple[3].strip() in jobStatusList):
 
@@ -52,9 +54,15 @@ def readJilFile(jobStatusFile):
 
 
 def getJobStatusFromMap(jobName):
+    
     logger=logging.getLogger("AutoSysUtils.getJobStatusFromMap")
+    if(jobName=="tas6inikwrefreshnucshortagemv_d"):
+        logger.debug("Error...")
     logger.info("Getting Job Status for {0}".format(jobName))
-    currentJobStatus=jobNameStatusDict[jobName.strip()]
+    if(jobName in jobNameStatusDict):
+        currentJobStatus=jobNameStatusDict[jobName.strip()]
+    else:
+        currentJobStatus="INACTIVE"
     logger.debug("Job Status is: {0}".format(currentJobStatus))
     jobStatusReturn=""
     if currentJobStatus in jobStatusDictMap.keys():
@@ -71,12 +79,14 @@ def writeUpdatedJobStatusFile(sourceJil):
     with open(sourceJil) as myJil:
         for line in myJil:
             currentJilLine=line.strip()
+            
             writeToFile(targetJil, line)
             if(re.match("insert_job",currentJilLine,flags=0)):
                 jobTuple=currentJilLine.split()
                 #print(jobTuple)
                 logger.info("Job Name found: {0}".format(jobTuple[1]))
                 jobNameList.append(jobTuple[1])
+                
                 statusAttrib = addAttribute("status", getJobStatusFromMap(jobTuple[1]))
                 logger.debug("Length of Status attribute {0} is {1}".format(statusAttrib,len(statusAttrib)))
                 if(len(statusAttrib)>8):

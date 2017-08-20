@@ -16,6 +16,10 @@ from groupExtract import *
 import copyJobStatus
 from copyJobStatus import *
 from workerUtilities import *
+import extractGlobals
+import copyJobStatus
+from extractGlobals import createGlobalsExport
+from copyJobStatus import *
 
 
 
@@ -35,6 +39,9 @@ def main():
     print("3. Read jil and extract command and condition for update_job file")
     print("4. Copy Job Status")
     print("5. Set Filewatchers in top level box by Calendar.")
+    print("6. Get conditions for job")
+    print("7. Export Global Variables")
+    print("8. Copy Job status ")
     user_choice=input("Select an option (1) or (2) or (3) or (4).")
     if(user_choice=="1"):
    
@@ -82,6 +89,21 @@ def main():
         p.items()
         print(p[database.hostname])
         getConditionsForJob("LUMOS","1521","aedbadmin","Test1234","SP3","cbos.perform.monthly.batch.check.008.r")
+
+    if(user_choice=="7"):
+        logging.info("Read Global variables file to allow an import format to be created.")
+        #print("Enter the path to the Global Variables file")
+        globalVarsPath=input("Enter the full path to the GV file that contains just the name and the value column. Strip out all other columns")
+        globalOutPath=input("Enter the full path to the Output GV file.")
+        createGlobalsExport(globalVarsPath,globalOutPath)
+
+    if(user_choice=="8"):
+        logging.info("Read the Job status file (autorep -J ALL -n) to copy the job statuses from one env to another")
+        jilFilePath=input("Enter the full path to the JIL File ")
+        jobStatusFile=input("Enter the full path to the job Status file")
+        readJilFile(jobStatusFile)
+        writeUpdatedJobStatusFile(jilFilePath)
+
         #createOracleConnection("LUMOS","1521","aedbadmin","Test1234","SP3")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_ods_heartbeat","d68.am.prebatch.maint.base.main.box","base","18:45")
     #readJil("c:\\jmofiles\\JOBS_____.Tranche4.jil","ns_pbds_pentaho_carte_reboot","d68.am.prebatch.maint.base.main.box","base","18:45")
