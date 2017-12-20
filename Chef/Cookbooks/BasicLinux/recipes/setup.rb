@@ -7,3 +7,6 @@ end
 service 'ntpd' do
 	action [:enable, :start]
 end
+package 'emacs' do
+	action :install
+end
