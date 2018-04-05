@@ -9,10 +9,6 @@ def readJil(jilFileInput):
             description_attribute = ""
             if("insert_job: " in line):
                 print("New job definition found")
-
-
-
-
             writeToFile("D:\\Fastenal-PSAdapter-Jobs\\JobsWithEmailAttribs.jil", line)
             writeToFile("D:\\Fastenal-PSAdapter-Jobs\\JobsWithEmailAttribs.jil","")
             if ("description" in line):
