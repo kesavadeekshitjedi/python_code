@@ -5,6 +5,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="extractJobsFromJil" />
+    <orderEntry type="module" module-name="ArchiveFileReader" />
+    <orderEntry type="module" module-name="Goldman_Extractors" />
+    <orderEntry type="module" module-name="AutoSysUtils" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="Nosetests" />

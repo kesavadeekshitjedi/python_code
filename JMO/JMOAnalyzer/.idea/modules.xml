@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../ArchiveFileReader/.idea/ArchiveFileReader.iml" filepath="$PROJECT_DIR$/../../ArchiveFileReader/.idea/ArchiveFileReader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../AutoSysUtils/.idea/AutoSysUtils.iml" filepath="$PROJECT_DIR$/../../AutoSysUtils/.idea/AutoSysUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../Goldman_Extractors/.idea/Goldman_Extractors.iml" filepath="$PROJECT_DIR$/../../Goldman_Extractors/.idea/Goldman_Extractors.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/JMOAnalyzer.iml" filepath="$PROJECT_DIR$/.idea/JMOAnalyzer.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../AutoSysUtils/extractJobsFromJil/.idea/extractJobsFromJil.iml" filepath="$PROJECT_DIR$/../../AutoSysUtils/extractJobsFromJil/.idea/extractJobsFromJil.iml" />
     </modules>
