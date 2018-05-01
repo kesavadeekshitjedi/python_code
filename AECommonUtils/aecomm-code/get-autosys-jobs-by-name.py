@@ -19,7 +19,7 @@ job_definition_dict = {}
 
 def write_to_file(inputString,outputFile):
     logger=logging.getLogger("AECommonUtils.get-autosys-jobs-by-name.write_to_file")
-    logger.info("test")
+    logger.debug(inputString)
     fileWriter = open(outputFile, "a")
     fileWriter.write(inputString)
 
