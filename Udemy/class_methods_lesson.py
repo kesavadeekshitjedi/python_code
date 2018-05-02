@@ -14,5 +14,12 @@ class myClass(object): # inheriting the object class again
     # example: myClass.regMethod(classObj,x,y) - where classObj is the object of myClass and x and y are variables of the regMethod method,
     # If a modeule (.py file) contains a list of methods and no class, then those methods are called functions
 
+    def addNumbers(self,x,y):
+        self.var1 = x
+        self.var2 = y
+        return x+y
+
+myObj = myClass()
 print("Author is : ",myClass.myMethod())
 print(myClass.myStaticMethod("Anantha"))
+print(myClass.addNumbers(myObj,2,3))
