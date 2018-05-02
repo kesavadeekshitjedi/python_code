@@ -18,7 +18,8 @@ class myClass(object): # inheriting the object class again
         self.var1 = x
         self.var2 = y
         return x+y
-
+        # The reason we use self.var1 etc is so that we attach the attribute to the object that is created.
+        # In this case, myObj (line below) will be able to print the values of x and y using myObj.x and myObj.y with the print statement. If the self.var1 etc were not used this would not be possible.
 myObj = myClass()
 print("Author is : ",myClass.myMethod())
 print(myClass.myStaticMethod("Anantha"))
