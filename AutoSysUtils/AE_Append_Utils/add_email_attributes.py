@@ -28,11 +28,11 @@ def readJil(jilFileInput):
 
             else:
                 if(len(line.strip()) != 0 and job_found==True):
-                    if("notification_msg" in line or "alarm_if_fail" in line or "alarm_if_terminated" in line):
-                        writeToFile("D:\\Fastenal-PSAdapter-Jobs\\JobsWithEmailAttribs2.jil", "#"+line)
-                    else:
+                    if("notification_msg"  in line):
+                        writeToFile("D:\\Fastenal-PSAdapter-Jobs\\JobsWithEmailAttribs2.jil", "notification_msg: \n ")
+                    '''else:
                         writeToFile("D:\\Fastenal-PSAdapter-Jobs\\JobsWithEmailAttribs2.jil", line)
-
+                    '''
 
                 if ("description" in line):
                     description_attribute = line.partition("description:")[2].strip()
